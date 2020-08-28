@@ -35,10 +35,12 @@
     "eslint-plugin-nuxt": "^1.0.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-wdio": "^6.0.12",
+    "firebase": "^7.19.1",
     "prettier": "^2.0.5",
     "stylelint": "^13.6.1",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^20.0.0",
+    "vuexfire": "^3.2.4",
     "webdriverio": "^6.3.5"
   }
 }
