@@ -1563,7 +1563,7 @@
     mustache "^2.3.0"
     stack-trace "0.0.10"
 
-"@posva/vuefire-core@^2.3.3":
+"@posva/vuefire-core@^2.2.0-alpha.0", "@posva/vuefire-core@^2.3.3":
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/@posva/vuefire-core/-/vuefire-core-2.3.3.tgz#b22bcbd6cff89e0b1d5a122c82b40fc19d7128d8"
   integrity sha512-mF5kyswrEd/+ZwTVFxaGoU4vCQ5G8aXHH83+VJerbjqYrh5p7BJURcGntpJR63ajvvK9IaFJMthyymAgICjkow==
@@ -11322,6 +11322,13 @@ vue@^2.6.12:
   version "2.6.12"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
   integrity sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg==
+
+vuefire@^2.2.0-alpha.0:
+  version "2.2.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/vuefire/-/vuefire-2.2.0-alpha.0.tgz#554ef8c2b7735aa2d4789f40fed6ab5fe2c014ac"
+  integrity sha512-nuPr1JJdOmy8zceOmmi7o7H7Iz7/IBHib/+hUHeDK6gVC1DE1mmoSgiy0CwL7bmTJ+SFd30F8lA6TeKNCBrNMg==
+  dependencies:
+    "@posva/vuefire-core" "^2.2.0-alpha.0"
 
 vuetify-loader@^1.4.3:
   version "1.6.0"
