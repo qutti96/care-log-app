@@ -14,6 +14,19 @@
           <v-card-title class="headline">
             {{ info.ufirstname }} {{ info.ulastname }}
           </v-card-title>
+          <div class="v-card__text">
+            <p class="body-1">{{ info.ufirstkana }}</p>
+            <p class="body-1">{{ info.ulastkana }}</p>
+            <p class="body-1">{{ info.uemail }}</p>
+            <p class="body-1">{{ info.utel }}</p>
+            <p class="body-1">{{ info.upostalcode }}</p>
+            <p class="body-1">{{ info.uaddress }}</p>
+            <p class="body-1">{{ info.upwd }}</p>
+            <p class="body-1">{{ info.uchild.child1 }}</p>
+            <p class="body-1">{{ info.uchild.child2 }}</p>
+            <p class="body-1">{{ info.createdAt }}</p>
+            <p class="body-1">{{ info.updatedAt }}</p>
+          </div>
         </v-card>
       </v-col>
     </v-flex>
