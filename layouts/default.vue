@@ -67,22 +67,22 @@ export default {
         {
           icon: 'mdi-chart-bubble',
           title: '保護者情報',
-          to: '/users',
+          to: '/userInfo',
         },
         {
           icon: 'mdi-chart-bubble',
           title: 'お子さま情報',
-          to: '/users',
+          to: '/childInfo',
         },
         {
           icon: 'mdi-chart-bubble',
           title: '保育記録',
-          to: '/care',
+          to: '/careLog',
         },
         {
           icon: 'mdi-chart-bubble',
           title: 'ログアウト',
-          to: '/care',
+          to: '/',
         },
       ],
       miniVariant: false,
