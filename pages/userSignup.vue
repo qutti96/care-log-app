@@ -245,7 +245,7 @@ export default {
       this.$refs.signupForm.reset()
     },
     addUser() {
-      if (this.$refs.signupForm.validate()) {
+      if (this.validate()) {
         db.collection('users')
           .add({
             ufirstname: this.signupForm.ufirstname,
