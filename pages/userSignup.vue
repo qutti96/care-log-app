@@ -179,15 +179,7 @@
             </v-card>
           </v-col>
         </v-row> -->
-        <!-- <v-btn
-          :disabled="!signupFormValidation.valid"
-          color="primary"
-          class="mr-4"
-          @click="validate"
-        >
-          Validate
-        </v-btn> -->
-
+        <v-btn class="mr-4" @click="reset">キャンセル</v-btn>
         <v-btn
           :disabled="!signupFormValidation.valid"
           color="teal lighten-1"
@@ -202,15 +194,7 @@
 </template>
 
 <script>
-// import Logo from '~/components/Logo.vue'
-// import VuetifyLogo from '~/components/VuetifyLogo.vue'
-
-// export default {
-//   components: {
-//     Logo,
-//     VuetifyLogo,
-//   },
-// }
+import firebase from 'firebase/app'
 import { db } from '~/plugins/firebase'
 
 export default {
@@ -252,13 +236,16 @@ export default {
       },
     }
   },
+  computed: {},
   methods: {
     validate() {
       this.$refs.signupForm.validate()
     },
+    reset() {
+      this.$refs.signupForm.reset()
+    },
     addUser() {
       if (this.$refs.signupForm.validate()) {
-        const date = this.$date(new Date(), 'DD MMMM, YYYY')
         db.collection('users')
           .add({
             ufirstname: this.signupForm.ufirstname,
@@ -273,8 +260,7 @@ export default {
             uchild: {
               child1: this.signupForm.uchild.child1,
             },
-            // createdAt: date,
-            createdAt: db.FieldValue.serverTimestamp(),
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
           })
           .then(function (docRef) {
             console.log('Document written with ID:', docRef.id)
@@ -285,7 +271,6 @@ export default {
           })
       }
     },
-
-},
+  },
 }
 </script>
