@@ -8,7 +8,7 @@
               <div class="v-card__text">
                 <v-text-field
                   v-model="signupForm.ufirstname"
-                  :rules="signupFormValidation.nameRules"
+                  :rules="signupFormRules.name"
                   :counter="10"
                   maxlength="10"
                   label="姓(First name)"
@@ -26,7 +26,7 @@
               <div class="v-card__text">
                 <v-text-field
                   v-model="signupForm.ulastname"
-                  :rules="signupFormValidation.nameRules"
+                  :rules="signupFormRules.name"
                   :counter="10"
                   maxlength="10"
                   label="名(Last name)"
@@ -44,7 +44,7 @@
               <div class="v-card__text">
                 <v-text-field
                   v-model="signupForm.ufirstkana"
-                  :rules="signupFormValidation.nameRules"
+                  :rules="signupFormRules.name"
                   :counter="10"
                   maxlength="10"
                   label="セイ(First name)"
@@ -62,7 +62,7 @@
               <div class="v-card__text">
                 <v-text-field
                   v-model="signupForm.ulastkana"
-                  :rules="signupFormValidation.nameRules"
+                  :rules="signupFormRules.name"
                   :counter="10"
                   maxlength="10"
                   label="メイ(Last name)"
@@ -80,7 +80,7 @@
               <div class="v-card__text">
                 <v-text-field
                   v-model="signupForm.utel"
-                  :rules="signupFormValidation.telRules"
+                  :rules="signupFormRules.tel"
                   :counter="11"
                   maxlength="11"
                   label="電話番号(Tel)"
@@ -98,7 +98,7 @@
               <div class="v-card__text">
                 <v-text-field
                   v-model="signupForm.uemail"
-                  :rules="signupFormValidation.emailRules"
+                  :rules="signupFormRules.email"
                   label="E-mailアドレス"
                   placeholder="abc@defg.hjk"
                   clearable
@@ -114,7 +114,7 @@
               <div class="v-card__text">
                 <v-text-field
                   v-model="signupForm.upostalcode"
-                  :rules="signupFormValidation.postalcodeRules"
+                  :rules="signupFormRules.postalcode"
                   label="郵便番号(postal code)"
                   placeholder="1234567"
                   :counter="7"
@@ -132,7 +132,7 @@
               <div class="v-card__text">
                 <v-text-field
                   v-model="signupForm.uaddress"
-                  :rules="signupFormValidation.addressRules"
+                  :rules="signupFormRules.address"
                   label="住所(address)"
                   placeholder="東京都世田谷区用賀xxxx"
                   :counter="30"
@@ -149,7 +149,7 @@
               <div class="v-card__text">
                 <v-text-field
                   v-model="signupForm.uchild.child1"
-                  :rules="signupFormValidation.childRules"
+                  :rules="signupFormRules.child"
                   label="お子さま一人目のお名前"
                   placeholder="太郎"
                   :counter="10"
@@ -197,6 +197,24 @@
 import firebase from 'firebase/app'
 import { db } from '~/plugins/firebase'
 
+const signupFormRules = {
+  name: [(v) => !!v || '名前は必須項目です'],
+  tel: [
+    (v) => !!v || '電話番号は必須項目です',
+    (v) => /[0-9]{11}/.test(v) || '半角数字11文字で入力してください',
+  ],
+  postalcode: [
+    (v) => !!v || '郵便番号は必須項目です',
+    (v) => /[0-9]{7}/.test(v) || '半角数字7文字で入力してください',
+  ],
+  address: [(v) => !!v || '住所は必須項目です'],
+  email: [
+    (v) => !!v || 'メールアドレスは必須項目です',
+    (v) => /.+@.+/.test(v) || '正しいE-mail形式でご記入ください',
+  ],
+  child: [(v) => !!v || 'お子さま一人目の入力は必須項目です'],
+}
+
 export default {
   data() {
     return {
@@ -218,21 +236,6 @@ export default {
       },
       signupFormValidation: {
         valid: false,
-        nameRules: [(v) => !!v || '名前は必須項目です'],
-        telRules: [
-          (v) => !!v || '電話番号は必須項目です',
-          (v) => /[0-9]{11}/.test(v) || '半角数字11文字で入力してください',
-        ],
-        postalcodeRules: [
-          (v) => !!v || '郵便番号は必須項目です',
-          (v) => /[0-9]{7}/.test(v) || '半角数字7文字で入力してください',
-        ],
-        addressRules: [(v) => !!v || '住所は必須項目です'],
-        emailRules: [
-          (v) => !!v || 'メールアドレスは必須項目です',
-          (v) => /.+@.+/.test(v) || '正しいE-mail形式でご記入ください',
-        ],
-        childRules: [(v) => !!v || 'お子さま一人目の入力は必須項目です'],
       },
     }
   },
