@@ -21,8 +21,6 @@ if (!firebase.apps.length) {
     measurementId: 'G-5ZX9FGDZGS',
   })
 }
-
 const db = firebase.firestore()
-// const settings = { timestampsInSnapshots: true }
-// db.settings(settings)
-export { db }
+const auth = firebase.auth()
+export { db, auth }
