@@ -66,6 +66,16 @@ export default {
         },
         {
           icon: 'mdi-chart-bubble',
+          title: 'ログイン画面',
+          to: '/login',
+        },
+        {
+          icon: 'mdi-chart-bubble',
+          title: 'ユーザー情報登録画面',
+          to: '/userSignUp',
+        },
+        {
+          icon: 'mdi-chart-bubble',
           title: '保護者情報',
           to: '/userInfo',
         },
