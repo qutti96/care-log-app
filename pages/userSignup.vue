@@ -239,10 +239,10 @@ export default {
   computed: {},
   methods: {
     validate() {
-      this.$refs.signupForm.validate()
+      return this.$refs.signupForm.validate()
     },
     reset() {
-      this.$refs.signupForm.reset()
+      return this.$refs.signupForm.reset()
     },
     addUser() {
       if (this.validate()) {
