@@ -56,7 +56,6 @@
 <script>
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import { auth } from '~/plugins/firebase'
 
 export default {
   data() {
