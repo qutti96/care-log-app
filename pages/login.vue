@@ -56,7 +56,7 @@
 <script>
 import firebase from 'firebase/app'
 import 'firebase/auth'
-// import { auth } from '~/plugins/firebase'
+import { auth } from '~/plugins/firebase'
 
 export default {
   data() {
@@ -80,17 +80,15 @@ export default {
     }
   },
   // computed: {},
-  // mounted: {},
   methods: {
     validate() {
-      this.$refs.loginForm.validate()
+      return this.$refs.loginForm.validate()
     },
     reset() {
-      this.$refs.loginForm.reset()
+      return this.$refs.loginForm.reset()
     },
     login() {
       if (this.validate()) {
-        console.log('login action')
         firebase.auth()
           .signInWithEmailAndPassword(
             this.loginForm.email,
