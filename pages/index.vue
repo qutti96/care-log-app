@@ -2,6 +2,13 @@
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8 md6>
       <v-col>
+        <div v-if="user.login">
+          <p>ログイン中です</p>
+          <v-btn class="mr-4" @click="logOut">ログアウト</v-btn>
+        </div>
+        <div v-else>
+          <p>ログアウトしました</p>
+        </div>
         <v-card class="mx-auto" max-width="400">
           <v-card-title class="headline">トップページです</v-card-title>
           <div class="v-card__text">
@@ -9,8 +16,8 @@
               このアプリは保育園での保育記録や生活ログを保育士と親が共有するアプリです。
             </p>
             <nuxt-link class="anchor-type--block" to="/">Top</nuxt-link>
-            <nuxt-link class="anchor-type--block" to="login">
-              ログイン画面(login.vue)
+            <nuxt-link class="anchor-type--block" to="userLogin">
+              ログイン画面(userLogin.vue)
             </nuxt-link>
             <nuxt-link class="anchor-type--block" to="userSignup">
               ユーザー登録画面(userSignup.vue)
@@ -32,15 +39,19 @@
 </template>
 
 <script>
-// import Logo from '~/components/Logo.vue'
-// import VuetifyLogo from '~/components/VuetifyLogo.vue'
-
-// export default {
-//   components: {
-//     Logo,
-//     VuetifyLogo,
-//   },
-// }
+export default {
+  computed: {
+    user() {
+      return this.$store.getters['auth/user']
+    },
+  },
+  methods: {
+    logOut() {
+      this.$store.dispatch('auth/signOut')
+      this.$router.push('userLogin')
+    },
+  },
+}
 </script>
 
 <style scoped>

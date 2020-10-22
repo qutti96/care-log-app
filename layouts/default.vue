@@ -67,7 +67,7 @@ export default {
         {
           icon: 'mdi-chart-bubble',
           title: 'ログイン画面',
-          to: '/login',
+          to: '/userLogin',
         },
         {
           icon: 'mdi-chart-bubble',
