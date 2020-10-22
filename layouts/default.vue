@@ -8,6 +8,23 @@
       app
     >
       <v-list>
+        <v-list-item>
+          <!-- <v-list-item-avatar>
+            <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
+          </v-list-item-avatar> -->
+          <v-list-item-content>
+            <div v-if="user.login">
+              <v-list-item-subtitle>{{ user.email }}</v-list-item-subtitle>
+              <v-btn elevation="2" small class="mt-2" @click="logOut">ログアウト</v-btn>
+            </div>
+            <div v-else>
+              <p>{{ user.login }}</p>
+              <nuxt-link class="anchor-type--block" to="userLogin">
+                ログイン
+              </nuxt-link>
+            </div>
+          </v-list-item-content>
+        </v-list-item>
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
@@ -100,6 +117,17 @@ export default {
       rightDrawer: false,
       title: 'care-log-app',
     }
+  },
+  computed: {
+    user() {
+      return this.$store.getters['modules/auth/user']
+    },
+  },
+  methods: {
+    logOut() {
+      this.$store.dispatch('modules/auth/signOut')
+      this.$router.push('userLogin')
+    },
   },
 }
 </script>

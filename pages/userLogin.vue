@@ -40,9 +40,6 @@
               </v-card>
             </v-col>
           </v-row>
-          <!-- <v-alert v-if="loginErrorMsg" text type="error">
-            {{ loginErrorMsg }}
-          </v-alert> -->
           <v-btn class="mr-4" @click="reset">キャンセル</v-btn>
           <v-btn
             :disabled="!loginFormValidation.valid"
@@ -59,10 +56,6 @@
 </template>
 
 <script>
-// import firebase from 'firebase/app'
-// import 'firebase/auth'
-// import { mapGetters, mapActions } from 'vuex'
-
 export default {
   data() {
     return {
@@ -87,7 +80,7 @@ export default {
   },
   computed: {
     user() {
-      return this.$store.getters['auth/user']
+      return this.$store.getters['modules/auth/user']
     },
   },
   methods: {
@@ -99,15 +92,7 @@ export default {
     },
     emailLogin(email, password) {
       if (this.validate()) {
-        this.$store.dispatch('auth/signInWithEmail', {
-          email: this.loginForm.email,
-          password: this.loginForm.password,
-        })
-        console.log(email)
-        console.log(password)
-        if (this.$store.getters['auth/user']) {
-          this.$router.push('/')
-        }
+        this.$store.dispatch('modules/auth/signInWithEmail', this.loginForm)
       }
     },
   },

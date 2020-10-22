@@ -2,13 +2,6 @@
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8 md6>
       <v-col>
-        <div v-if="user.login">
-          <p>ログイン中です</p>
-          <v-btn class="mr-4" @click="logOut">ログアウト</v-btn>
-        </div>
-        <div v-else>
-          <p>ログアウトしました</p>
-        </div>
         <v-card class="mx-auto" max-width="400">
           <v-card-title class="headline">トップページです</v-card-title>
           <div class="v-card__text">
@@ -37,22 +30,6 @@
     </v-flex>
   </v-layout>
 </template>
-
-<script>
-export default {
-  computed: {
-    user() {
-      return this.$store.getters['auth/user']
-    },
-  },
-  methods: {
-    logOut() {
-      this.$store.dispatch('auth/signOut')
-      this.$router.push('userLogin')
-    },
-  },
-}
-</script>
 
 <style scoped>
 .anchor-type--block {
