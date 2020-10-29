@@ -236,11 +236,12 @@ export default {
       },
     }
   },
-  computed: {},
-  methods: {
+  computed: {
     validate() {
-      return this.$refs.signupForm.validate()
+      return this.$refs.signupForm.validate
     },
+  },
+  methods: {
     reset() {
       return this.$refs.signupForm.reset()
     },
