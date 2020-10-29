@@ -244,20 +244,17 @@ export default {
     reset() {
       return this.$refs.signupForm.reset()
     },
-    addUser() {
+    async addUser() {
       if (this.validate()) {
-        db.collection('users')
-          .add({
+        try {
+          const docRef = await db.collection('users').add({
             ...this.signupForm,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
           })
-          .then(function (docRef) {
-            console.log('Document written with ID:', docRef.id)
-            // this.$router.push({ path: `/user/${docRef.id}` })
-          })
-          .catch(function (error) {
-            console.error('Error adding document:', error)
-          })
+          console.log('Document written with ID:', docRef.id)
+        } catch (error) {
+          console.error('Error adding document:', error)
+        }
       }
     },
   },
