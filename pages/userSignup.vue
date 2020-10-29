@@ -248,18 +248,7 @@ export default {
       if (this.validate()) {
         db.collection('users')
           .add({
-            ufirstname: this.signupForm.ufirstname,
-            ulastname: this.signupForm.ulastname,
-            ufirstkana: this.signupForm.ufirstkana,
-            ulastkana: this.signupForm.ulastkana,
-            uid: this.signupForm.uid,
-            utel: this.signupForm.utel,
-            uemail: this.signupForm.uemail,
-            upostalcode: this.signupForm.upostalcode,
-            uaddress: this.signupForm.uaddress,
-            uchild: {
-              child1: this.signupForm.uchild.child1,
-            },
+            ...this.signupForm,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
           })
           .then(function (docRef) {
