@@ -1,16 +1,19 @@
 <template>
-  <v-form ref="form" v-model="valid" lazy-validation>
+  <v-form ref="signupForm" v-model="signupFormValidation.valid" lazy-validation>
     <v-layout column justify-center align-center>
       <v-flex xs12 sm8 md6>
         <v-row>
           <v-col>
-            <v-card class="mx-auto" max-width="400">
+            <v-card class="mx-auto" min-width="400">
               <div class="v-card__text">
                 <v-text-field
-                  v-model="firstname"
-                  :rules="nameRules"
+                  v-model="signupForm.ufirstname"
+                  :rules="signupFormValidation.nameRules"
                   :counter="10"
+                  maxlength="10"
                   label="姓(First name)"
+                  placeholder="鈴木"
+                  clearable
                   required
                 ></v-text-field>
               </div>
@@ -19,13 +22,16 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-card class="mx-auto" max-width="400">
+            <v-card class="mx-auto" min-width="400">
               <div class="v-card__text">
                 <v-text-field
-                  v-model="firstname"
-                  :rules="nameRules"
+                  v-model="signupForm.ulastname"
+                  :rules="signupFormValidation.nameRules"
                   :counter="10"
+                  maxlength="10"
                   label="名(Last name)"
+                  placeholder="花子"
+                  clearable
                   required
                 ></v-text-field>
               </div>
@@ -34,13 +40,16 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-card class="mx-auto" max-width="400">
+            <v-card class="mx-auto" min-width="400">
               <div class="v-card__text">
                 <v-text-field
-                  v-model="firstname"
-                  :rules="nameRules"
+                  v-model="signupForm.ufirstkana"
+                  :rules="signupFormValidation.nameRules"
                   :counter="10"
+                  maxlength="10"
                   label="セイ(First name)"
+                  placeholder="スズキ"
+                  clearable
                   required
                 ></v-text-field>
               </div>
@@ -49,13 +58,16 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-card class="mx-auto" max-width="400">
+            <v-card class="mx-auto" min-width="400">
               <div class="v-card__text">
                 <v-text-field
-                  v-model="lastname"
-                  :rules="nameRules"
+                  v-model="signupForm.ulastkana"
+                  :rules="signupFormValidation.nameRules"
                   :counter="10"
+                  maxlength="10"
                   label="メイ(Last name)"
+                  placeholder="ハナコ"
+                  clearable
                   required
                 ></v-text-field>
               </div>
@@ -64,13 +76,16 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-card class="mx-auto" max-width="400">
+            <v-card class="mx-auto" min-width="400">
               <div class="v-card__text">
                 <v-text-field
-                  v-model="lastname"
-                  :rules="nameRules"
-                  :counter="10"
+                  v-model="signupForm.utel"
+                  :rules="signupFormValidation.telRules"
+                  :counter="11"
+                  maxlength="11"
                   label="電話番号(Tel)"
+                  placeholder="09012345678"
+                  clearable
                   required
                 ></v-text-field>
               </div>
@@ -79,12 +94,14 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-card class="mx-auto" max-width="400">
+            <v-card class="mx-auto" min-width="400">
               <div class="v-card__text">
                 <v-text-field
-                  v-model="email"
-                  :rules="emailRules"
+                  v-model="signupForm.uemail"
+                  :rules="signupFormValidation.emailRules"
                   label="E-mailアドレス"
+                  placeholder="abc@defg.hjk"
+                  clearable
                   required
                 ></v-text-field>
               </div>
@@ -93,12 +110,16 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-card class="mx-auto" max-width="400">
+            <v-card class="mx-auto" min-width="400">
               <div class="v-card__text">
                 <v-text-field
-                  v-model="email"
-                  :rules="emailRules"
+                  v-model="signupForm.upostalcode"
+                  :rules="signupFormValidation.postalcodeRules"
                   label="郵便番号(postal code)"
+                  placeholder="1234567"
+                  :counter="7"
+                  maxlength="7"
+                  clearable
                   required
                 ></v-text-field>
               </div>
@@ -107,12 +128,15 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-card class="mx-auto" max-width="400">
+            <v-card class="mx-auto" min-width="400">
               <div class="v-card__text">
                 <v-text-field
-                  v-model="email"
-                  :rules="emailRules"
+                  v-model="signupForm.uaddress"
+                  :rules="signupFormValidation.addressRules"
                   label="住所(address)"
+                  placeholder="東京都世田谷区用賀xxxx"
+                  :counter="30"
+                  clearable
                   required
                 ></v-text-field>
               </div>
@@ -121,39 +145,48 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-card class="mx-auto" max-width="400">
+            <v-card class="mx-auto" min-width="400">
               <div class="v-card__text">
                 <v-text-field
-                  v-model="email"
-                  :rules="emailRules"
+                  v-model="signupForm.uchild.child1"
+                  :rules="signupFormValidation.childRules"
                   label="お子さま一人目のお名前"
+                  placeholder="太郎"
+                  :counter="10"
+                  maxlength="10"
+                  clearable
                   required
                 ></v-text-field>
               </div>
+              <!-- <v-card-actions>
+                <v-btn color="primary accent-4">お子さま追加</v-btn>
+              </v-card-actions> -->
             </v-card>
           </v-col>
         </v-row>
-        <v-row>
+        <!-- <v-row>
           <v-col>
-            <v-card class="mx-auto" max-width="400">
+            <v-card class="mx-auto" min-width="400">
               <div class="v-card__text">
                 <v-text-field
                   v-model="email"
                   :rules="emailRules"
                   label="お子さま二人目のお名前"
+                  clearable
                   required
                 ></v-text-field>
               </div>
             </v-card>
           </v-col>
-        </v-row>
+        </v-row> -->
+        <v-btn class="mr-4" @click="reset">キャンセル</v-btn>
         <v-btn
-          :disabled="!valid"
-          color="success"
+          :disabled="!signupFormValidation.valid"
+          color="teal lighten-1"
           class="mr-4"
-          @click="validate"
+          @click="addUser"
         >
-          Validate
+          <span class="white--text font-weight-bold">登録する</span>
         </v-btn>
       </v-flex>
     </v-layout>
@@ -161,13 +194,70 @@
 </template>
 
 <script>
-// import Logo from '~/components/Logo.vue'
-// import VuetifyLogo from '~/components/VuetifyLogo.vue'
+import firebase from 'firebase/app'
+import { db } from '~/plugins/firebase'
 
-// export default {
-//   components: {
-//     Logo,
-//     VuetifyLogo,
-//   },
-// }
+export default {
+  data() {
+    return {
+      signupForm: {
+        ufirstname: '',
+        ulastname: '',
+        ufirstkana: '',
+        ulastkana: '',
+        uid: '',
+        utel: '',
+        uemail: '',
+        upostalcode: '',
+        uaddress: '',
+        uchild: {
+          child1: '',
+        },
+        createdAt: '',
+        updateAt: '',
+      },
+      signupFormValidation: {
+        valid: false,
+        nameRules: [(v) => !!v || '名前は必須項目です'],
+        telRules: [
+          (v) => !!v || '電話番号は必須項目です',
+          (v) => /[0-9]{11}/.test(v) || '半角数字11文字で入力してください',
+        ],
+        postalcodeRules: [
+          (v) => !!v || '郵便番号は必須項目です',
+          (v) => /[0-9]{7}/.test(v) || '半角数字7文字で入力してください',
+        ],
+        addressRules: [(v) => !!v || '住所は必須項目です'],
+        emailRules: [
+          (v) => !!v || 'メールアドレスは必須項目です',
+          (v) => /.+@.+/.test(v) || '正しいE-mail形式でご記入ください',
+        ],
+        childRules: [(v) => !!v || 'お子さま一人目の入力は必須項目です'],
+      },
+    }
+  },
+  computed: {
+    validate() {
+      return this.$refs.signupForm.validate
+    },
+  },
+  methods: {
+    reset() {
+      return this.$refs.signupForm.reset()
+    },
+    async addUser() {
+      if (this.validate()) {
+        try {
+          const docRef = await db.collection('users').add({
+            ...this.signupForm,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          })
+          console.log('Document written with ID:', docRef.id)
+        } catch (error) {
+          console.error('Error adding document:', error)
+        }
+      }
+    },
+  },
+}
 </script>
